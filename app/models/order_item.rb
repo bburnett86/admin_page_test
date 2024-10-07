@@ -1,4 +1,6 @@
 class OrderItem < ApplicationRecord
+	include StatusEnum
+
 	belongs_to :order, primary_key: 'id', foreign_key: 'order_id'
   belongs_to :product, primary_key: 'id', foreign_key: 'product_id'
 
@@ -9,21 +11,11 @@ class OrderItem < ApplicationRecord
 
 	validates :order_id, presence: true
 	validates :product_id, presence: true
+	validates :expected_delivery_date, presence: true
 	validates :cost, presence: true, numericality: { greater_than: 0 }
 	validates :current_price, presence: true, numericality: { greater_than: 0 }
 	validates :sale_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 	validates :percentage_off, presence: true, numericality: { greater_than_or_equal_to: 0 }
-
-	enum :status, {
-		pending: 'pending',
-		processed: 'processed',
-		cancelled: 'cancelled',
-		delivered: 'delivered',
-		returned: 'returned',
-		delayed: 'delayed',
-		returning: 'returning',
-		shipped: 'shipped'
-	}, default: :pending, _prefix: true, validate: true
 
 	def handle_status_change
 		notification_details = 
@@ -43,12 +35,6 @@ class OrderItem < ApplicationRecord
 		send_notification(notification_details)
 	end
 
-  private
-
-	def send_notification(details)
-		CreateNotificationJob.perform_later(user: details[:user] || user, notifiable: self, description: details[:description], status: details[:status])
-	end
-
 	def find_popular_companion_items
 		orders_with_current_item = self.order_id
 	
@@ -63,4 +49,11 @@ class OrderItem < ApplicationRecord
 	
 		popular_items.keys
 	end
+
+  private
+
+	def send_notification(details)
+		CreateNotificationJob.perform_later(creator: self.order.user, notifiable: self, description: details[:description], status: details[:status])
+	end
+
 end

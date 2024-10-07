@@ -1,0 +1,181 @@
+# ProcessedOrderhistory for pending_order
+pending_order_item_history_one:
+  order_item: pending_order_item_one
+  order: pending_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 2.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 12.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+pending_order_item_history_two:
+  order_item: pending_order_item_two
+  order: pending_order
+  product: product_two
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+  created_at: <%= 2.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 12.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+pending_order_item_history_three:
+  order_item: pending_order_item_three
+  order: pending_order
+  product: product_three
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+  created_at: <%= 2.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 12.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+# ProcessedOrderhistory for processed_order
+processed_order_item_history_one:
+  order_item: processed_order_item_one
+  order: processed_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+processed_order_item_history_two:
+  order_item: processed_order_item_two
+  order: processed_order
+  product: product_two
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+  created_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+processed_order_item_history_three:
+  order_item: processed_order_item_three
+  order: processed_order
+  product: product_three
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+  created_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 2.hours.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+# ProcessedOrderhistory for delivered_order
+delivered_order_item_history_one:
+  order_item: delivered_order_item_one
+  order: delivered_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 3.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 4.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+# ProcessedOrderhistory for delayed_order
+delayed_order_item_history_one:
+  order_item: delayed_order_item_one
+  order: delayed_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 3.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 1.week.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+delayed_order_item_history_two:
+  order_item: delayed_order_item_two
+  order: delayed_order
+  product: product_two
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+  created_at: <%= 3.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 1.week.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+delayed_order_item_history_three:
+  order_item: delayed_order_item_three
+  order: delayed_order
+  product: product_three
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+  created_at: <%= 3.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 1.week.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+# ProcessedOrderhistory for returning_order
+returning_order_item_history_one:
+  order_item: returning_order_item_one
+  order: returning_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 4.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 10.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+returning_order_item_history_two:
+  order_item: returning_order_item_two
+  order: returning_order
+  product: product_two
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+  created_at: <%= 4.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 10.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+returning_order_item_history_three:
+  order_item: returning_order_item_three
+  order: returning_order
+  product: product_three
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+  created_at: <%= 4.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= 10.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+
+# ProcessedOrderhistory for shipped_order
+shipped_order_item_history_one:
+  order_item: shipped_order_item_one
+  order: shipped_order
+  product: product_one
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+  created_at: <%= 3.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+
+shipped_order_item_history_two:
+  order_item: shipped_order_item_two
+  order: shipped_order
+  product: product_two
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+  created_at: <%= 3.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+
+shipped_order_item_history_three:
+  order_item: shipped_order_item_three
+  order: shipped_order
+  product: product_three
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+  created_at: <%= 3.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
+  updated_at: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>

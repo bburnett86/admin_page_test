@@ -1,0 +1,51 @@
+# test/fixtures/products.yml
+
+product_one:
+  name: "Eco Friendly Water Bottle"
+  description: "A sustainable water bottle made from recycled materials."
+  inventory_count: 100
+  active: true
+  cost: 5.00
+  current_price: 10.00
+  sale_price: 8.00
+  percentage_off: 20
+
+product_two:
+  name: "Wireless Charging Pad"
+  description: "A fast-charging pad with sleek design and compatibility with all devices."
+  inventory_count: 50
+  active: true
+  cost: 15.00
+  current_price: 30.00
+  sale_price: 25.00
+  percentage_off: 17
+
+product_three:
+  name: "Bluetooth Headphones"
+  description: "Noise-cancelling headphones with long battery life and superior sound quality."
+  inventory_count: 75
+  active: true
+  cost: 20.00
+  current_price: 50.00
+  sale_price: 45.00
+  percentage_off: 10
+
+product_four:
+  name: "Organic Cotton T-shirt"
+  description: "Comfortable and soft T-shirt made from 100% organic cotton."
+  inventory_count: 200
+  active: true
+  cost: 8.00
+  current_price: 20.00
+  sale_price: 18.00
+  percentage_off: 10
+
+product_five:
+  name: "Smart Fitness Tracker"
+  description: "A waterproof fitness tracker with heart rate monitor and GPS tracking."
+  inventory_count: 30
+  active: true
+  cost: 25.00
+  current_price: 60.00
+  sale_price: 55.00
+  percentage_off: 8

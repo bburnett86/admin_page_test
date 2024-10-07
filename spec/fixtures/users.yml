@@ -1,0 +1,61 @@
+# test/fixtures/users.yml
+
+# Standard Users
+standard_user_one:
+  first_name: "Standard"
+  last_name: "User One"
+  email: "standard_user_one@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "standard"
+
+standard_user_two:
+  first_name: "Standard"
+  last_name: "User Two"
+  email: "standard_user_two@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "standard"
+
+# Customer Service Users
+customer_service_user_one:
+  first_name: "Customer Service"
+  last_name: "User One"
+  email: "customer_service_user_one@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "customer_service"
+
+customer_service_user_two:
+  first_name: "Customer Service"
+  last_name: "User Two"
+  email: "customer_service_user_two@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "customer_service"
+
+# Manager Users
+manager_user_one:
+  first_name: "Manager"
+  last_name: "User One"
+  email: "manager_user_one@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "manager"
+
+manager_user_two:
+  first_name: "Manager"
+  last_name: "User Two"
+  email: "manager_user_two@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "manager"
+
+# Admin Users
+admin_user_one:
+  first_name: "Admin"
+  last_name: "User One"
+  email: "admin_user_one@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "admin"
+
+admin_user_two:
+  first_name: "Admin"
+  last_name: "User Two"
+  email: "admin_user_two@example.com"
+  encrypted_password: "<your_encrypted_password_here>"
+  role: "admin"

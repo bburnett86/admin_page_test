@@ -1,0 +1,2 @@
+class ProductPricingHistoriesController < ApplicationController
+end

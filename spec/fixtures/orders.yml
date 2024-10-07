@@ -22,7 +22,7 @@ cancelled_order:
 delivered_order:
   user: standard_user_one
   status: delivered
-  expected_delivery_date: nil
+  expected_delivery_date: <%= 4.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
   created_at: <%= 3.weeks.ago.strftime("%Y-%m-%d %H:%M:%S") %>
   updated_at: <%= 4.days.ago.strftime("%Y-%m-%d %H:%M:%S") %>
 

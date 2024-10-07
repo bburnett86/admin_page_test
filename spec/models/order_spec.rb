@@ -4,16 +4,18 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   fixtures :orders, :users, :products, :order_items
 
-  # Associations
-  it { should belong_to(:user) }
-  it { should have_many(:order_items) }
-  it { should have_many(:products).through(:order_items) }
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should have_many(:order_items) }
+    it { should have_many(:products).through(:order_items) }
+  end
 
-  # Validations
-  it { should validate_presence_of(:user_id) }
-  it { should validate_presence_of(:status) }
-  it { should define_enum_for(:status).with_values(pending: 'pending', processed: 'processed', cancelled: 'cancelled', delivered: 'delivered', returned: 'returned', delayed: 'delayed', returning: 'returning', shipped: 'shipped').backed_by_column_of_type(:string) }
-
+  describe 'validations' do
+    it { should validate_presence_of(:user_id) }
+    it { should validate_presence_of(:status) }
+    it { should define_enum_for(:status).with_values(pending: 'pending', processed: 'processed', cancelled: 'cancelled', delivered: 'delivered', returned: 'returned', delayed: 'delayed', returning: 'returning', shipped: 'shipped').backed_by_column_of_type(:string) }
+  end
+  
   # Public Methods
 	describe '#receipt' do
 		it 'returns a receipt with correct total and item details' do
@@ -45,7 +47,7 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  # Private Methods
+  # Private Method Functionality
   describe 'expected_delivery_date validation' do
     it 'is invalid if the expected_delivery_date is before the creation date for statuses other than pending, cancelled, delivered, returned, or returning' do
       order = Order.new(expected_delivery_date: 1.day.ago, created_at: Time.zone.now, status: 'processed')

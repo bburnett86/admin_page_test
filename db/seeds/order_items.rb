@@ -21,6 +21,7 @@ Order.find_each do |order|
       current_price: product.current_price,
       sale_price: product.sale_price,
       percentage_off: product.percentage_off,
+      expected_delivery_date: order.expected_delivery_date,
     )
   end
 end

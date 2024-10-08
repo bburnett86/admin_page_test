@@ -3,7 +3,7 @@ class Product < ApplicationRecord
 	has_many :order_items
   has_many :orders, through: :order_items
 	has_many :tickets, as: :ticketable
-
+  
   validates :name, presence: true, length: { minimum: 5 }, uniqueness: true
   validates :description, presence: true, length: { minimum: 10 }
   validates :inventory_count, presence: true, numericality: { greater_than_or_equal_to: 0 }

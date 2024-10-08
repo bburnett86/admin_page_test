@@ -1,0 +1,61 @@
+# spec/fixtures/tickets.yml
+
+ticket_new_missing_part:
+  description: "Missing part from the new shipment."
+  status: "new_ticket"
+  ticket_type: "missing_part"
+  active: true
+  ticketable: delivered_order_item_one
+  process_by: <%= 3.days.from_now.to_date %>
+  creator: standard_user_one
+  assigned_to: admin_user_one
+
+ticket_manager_feedback_not_performing:
+  description: "Item not performing as expected, requires manager's feedback."
+  status: "manager_feedback"
+  ticket_type: "not_performing_as_expected"
+  active: true
+  ticketable: delivered_order_item_two
+  process_by: <%= 5.days.from_now.to_date %>
+  creator: standard_user_two
+  assigned_to: admin_user_one
+
+ticket_processing_unexpected_outcome:
+  description: "Processing ticket due to unexpected outcome."
+  status: "processing"
+  ticket_type: "unexpected_outcome"
+  active: true
+  ticketable: delivered_order_item_three
+  process_by: <%= 1.week.from_now.to_date %>
+  creator: standard_user_one
+  assigned_to: admin_user_one
+
+ticket_awaiting_feedback_needs_solution:
+  description: "Awaiting customer feedback for a technical solution."
+  status: "awaiting_feedback"
+  ticket_type: "needs_technical_solution"
+  active: true
+  ticketable: product_one
+  process_by: <%= 10.days.from_now.to_date %>
+  creator: standard_user_two
+  assigned_to: admin_user_one
+
+ticket_approved_doesnt_match:
+  description: "Ticket approved, item doesn't match description."
+  status: "approved"
+  ticket_type: "doesnt_match_description"
+  active: false
+  ticketable: product_two
+  process_by: <%= 2.weeks.from_now.to_date %>
+  creator: standard_user_one
+  assigned_to: admin_user_one
+
+ticket_no_action_required_other:
+  description: "No action required for this ticket."
+  status: "no_action_required"
+  ticket_type: "other"
+  active: false
+  ticketable: product_three
+  process_by: <%= 15.days.from_now.to_date %>
+  creator: standard_user_one
+  assigned_to: admin_user_one

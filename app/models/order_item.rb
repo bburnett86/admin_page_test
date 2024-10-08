@@ -4,7 +4,7 @@ class OrderItem < ApplicationRecord
 	belongs_to :order, primary_key: 'id', foreign_key: 'order_id'
   belongs_to :product, primary_key: 'id', foreign_key: 'product_id'
 
-	has_many :tickets, as: :ticketable
+	has_many :tickets, foreign_key: 'ticketable_id', as: 'ticketable'
 	has_many :notifications, as: :notifiable
 
 	after_update :handle_status_change, if: :saved_change_to_status?

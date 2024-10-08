@@ -1,5 +1,6 @@
 class OrderItem < ApplicationRecord
 	include StatusEnum
+	scope :before_date, ->(end_date) { where('created_at < ?', end_date) }
 
 	belongs_to :order, primary_key: 'id', foreign_key: 'order_id'
   belongs_to :product, primary_key: 'id', foreign_key: 'product_id'

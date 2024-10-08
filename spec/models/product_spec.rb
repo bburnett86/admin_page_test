@@ -20,4 +20,12 @@ RSpec.describe Product, type: :model do
   it { should validate_numericality_of(:sale_price).is_greater_than_or_equal_to(0) }
   it { should validate_numericality_of(:percentage_off).is_greater_than_or_equal_to(0) }
 
+  # Scope
+  describe '.before_date' do
+
+    it 'returns total products with order_items created before the specified date' do
+      expect(Product.before_date(Time.zone.now).length).to eq(24)
+    end
+  end
+
 end

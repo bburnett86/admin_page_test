@@ -2,58 +2,66 @@ module ProductAnalytics
   extend ActiveSupport::Concern
 
   class_methods do
-		def total_products_cancellations_before_date(end_date)
-			cancellations = OrderItem.where('created_at < ?', end_date).where(status: 'cancelled').count
-			{end_date: end_date, cancellations: cancellations}
-		end
-	
-		def total_products_returns_before_date(end_date)
-			returns = OrderItem.where('created_at < ?', end_date).where(status: 'returned').count
-			{end_date: end_date, returns: returns}
-		end
-	
-		def total_products_sold_before_date(end_date)
-			sold = OrderItem.where('created_at < ?', end_date).where(status: 'delivered').count
-			{end_date: end_date, sold: sold}
-		end
+		def total_items_by_status_before_date(status, end_date)
+      count = Product.before_date(end_date).where(order_items: { status: status }).count
 
-		def total_revenue_before_date(end_date)
-			OrderItem.where('created_at < ?', end_date).sum(:sale_price)
-		end
-	
-		def total_cost_before_date(end_date)
-			OrderItem.where('created_at < ?', end_date).sum(:cost)
-		end
+      {end_date: end_date, status => count}
+    end
 
-		def total_profit_before_date(end_date)
-			total_revenue = OrderItem.where('created_at < ?', end_date).sum(:sale_price)
-			total_cost = OrderItem.where('created_at < ?', end_date).sum(:cost)
-			total_revenue - total_cost
+		def financial_totals_before_date(end_date)
+			eligible_items = OrderItem.before_date(end_date).where.not(status: [:returned, :returning, :cancelled])
+		
+			total_revenue = eligible_items.sum(:sale_price)
+			total_cost = eligible_items.sum(:cost)
+			total_profit = total_revenue - total_cost
+		
+			{revenue: total_revenue, cost: total_cost, profit: total_profit, end_date: end_date}
 		end
 	end
 
+	def financial_totals_before_date(end_date)
+		total_revenue = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id).where.not(status: [:returned, :returning, :cancelled]).sum('sale_price')
+	
+		total_cost = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id).where.not(status: [:returned, :returning, :cancelled]).sum('cost')
+	
+		total_profit = total_revenue - total_cost
+	
+		{revenue: total_revenue, cost: total_cost, profit: total_profit, end_date: end_date}
+	end
+	
 	def revenue_before_date(end_date)
-		self.orders.product_price_histories.where('created_at < ?', end_date).sum(:sale_price)
-	end
+		revenue = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id).where.not(status: [:returned, :returning, :cancelled]).sum(:sale_price)
 
+		{revenue: revenue, end_date: end_date}
+	end
+	
 	def profit_before_date(end_date)
-		revenue = self.orders.product_price_histories.where('product_price_histories.created_at < ?', end_date).sum(:sale_price)
-		cost = self.order_items.where('order_items.created_at < ?', end_date).sum(:cost)
-		revenue - cost
-	end
+		eligible_items = OrderItem.before_date(end_date).where(product_id: self.id).where.not(status: [:returned, :returning, :cancelled])
+	
+		revenue = eligible_items.sum(:sale_price)
+		cost = eligible_items.sum(:cost)
+	
+		profit = revenue - cost
 
-	def product_cancellations_before_date(end_date)
-		cancellations = self.order_items.where('created_at < ?', end_date).where(status: 'cancelled').count
-		{end_date: end_date, cancellations: cancellations}
+		{end_date: end_date, profit: profit}
 	end
-
-	def product_returns_before_date(end_date)
-		returns = self.order_items.where('created_at < ?', end_date).where(status: 'returned').count
-		{end_date: end_date, returns: returns}
-	end
-
+	
 	def products_sold_before_date(end_date)
-		sold = self.order_items.where('created_at < ?', end_date).where(status: 'delivered').count
+		sold = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id).where.not(status: [:returned, :returning, :cancelled]).count
+		
 		{end_date: end_date, sold: sold}
 	end
+	
+	def product_cancellations_before_date(end_date)
+		cancellations = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id, status: 'cancelled').count
+
+		{end_date: end_date, cancellations: cancellations}
+	end
+	
+	def product_returns_before_date(end_date)
+		returns = OrderItem.joins(:order).where("orders.created_at < ?", end_date).where(product_id: self.id, status: 'returned').count
+		
+		{end_date: end_date, returns: returns}
+	end
+	
 end

@@ -1,5 +1,8 @@
 class Order < ApplicationRecord
 	include OrderAnalytics
+
+  scope :before_date, ->(end_date) { where('created_at < ?', end_date) }
+  scope :by_status, ->(status) { where(status: status) }
 	
 	belongs_to :user
 	has_many :order_items

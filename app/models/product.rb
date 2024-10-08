@@ -12,4 +12,6 @@ class Product < ApplicationRecord
 	validates :current_price, presence: true, numericality: { greater_than: 0 }
 	validates :sale_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 	validates :percentage_off, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  scope :before_date, ->(end_date) { joins(:order_items).where('order_items.created_at < ?', end_date) }
 end

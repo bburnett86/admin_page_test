@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-include UserAnalytics
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

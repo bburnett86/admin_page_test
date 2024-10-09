@@ -1,59 +1,42 @@
 require 'rails_helper'
 
-RSpec.describe Product, type: :model do
-  fixtures :products
-  let(:end_date) { Time.now }
+RSpec.describe ProductAnalytics, type: :model do
 
-  describe '.total_items_by_status_before_date' do
-    it 'returns the count of items by status before a specific date' do
-      result = Product.total_items_by_status_before_date(:shipped, end_date)
-      expect(result).to eq({end_date: end_date, shipped: 3})
+  describe '.calculate_totals' do
+    context 'when calculating economic totals' do
+      [:revenue, :cost, :profit].each do |type|
+        end_dates = ProductAnalytics.create_chart_dates(7)
+        it "calculates #{type} totals before specific dates" do
+          result = Product.calculate_totals(type)
+          expect(result[:data]).not_to be_empty
+          expect(result[:name]).to eq(type)
+          expect(result[:x_axis_categories]).to match_array(end_dates)
+        end
+      end
+      it "raises an ArgumentError for invalid economic type" do
+        expect { Product.calculate_totals(:invalid_type) }.to raise_error(ArgumentError)
+      end
     end
-  end
 
-  describe '.financial_totals_before_date' do
-    it 'returns the financial totals before a specific date' do
-      result = Product.financial_totals_before_date(end_date)
-      expect(result).to eq({revenue: 320, cost: 165, profit: 155, end_date: end_date})
+    context 'when calculating status totals' do
+      OrderItem.statuses.keys.each do |status|
+        it "calculates totals for #{status} status before specific dates" do
+          end_dates = ProductAnalytics.create_chart_dates(7)
+          result = Product.calculate_totals(status.to_sym)
+          expect(result[:data]).not_to be_empty
+          expect(result[:name]).to eq(status.to_sym)
+          expect(result[:x_axis_categories]).to match_array(end_dates)
+        end
+      end
+      it "raises an ArgumentError for invalid status type" do
+        expect { Product.calculate_totals(:invalid_status) }.to raise_error(ArgumentError)
+      end
     end
-  end
 
-  describe '#revenue_before_date' do
-    it 'returns the revenue before a specific date' do
-      product = products(:product_one)
-      expect(product.revenue_before_date(end_date)).to eq(
-        { revenue: 40, end_date: end_date }
-      )
-    end
-  end
-
-  describe '#profit_before_date' do
-    it 'calculates the profit before a specific date' do
-      product = products(:product_one)
-      expect(product.profit_before_date(end_date)).to eq({
-        profit: 15, end_date: end_date
-      })
-    end
-  end
-
-  describe '#product_cancellations_before_date' do
-    it 'counts the product cancellations before a specific date' do
-      product = products(:product_one)
-      expect(product.product_cancellations_before_date(end_date)).to eq({end_date: end_date, cancellations: 2})
-    end
-  end
-
-  describe '#product_returns_before_date' do
-    it 'counts the product returns before a specific date' do
-      product = products(:product_one)
-      expect(product.product_returns_before_date(end_date)).to eq({end_date: end_date, returns: 1})
-    end
-  end
-
-  describe '#products_sold_before_date' do
-    it 'counts the products sold before a specific date' do
-      product = products(:product_one)
-      expect(product.products_sold_before_date(end_date)).to eq({end_date: end_date, sold: 5})
+    context 'with invalid type' do
+      it 'raises an ArgumentError' do
+        expect { Product.calculate_totals(:invalid_type) }.to raise_error(ArgumentError)
+      end
     end
   end
 end

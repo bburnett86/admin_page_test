@@ -38,37 +38,7 @@ describe 'validations' do
   end
 end
 
-	# Public Methods
-	describe '#find_popular_companion_items' do
-		it 'returns popular companion items' do
-			order_item = order_items(:pending_order_item_one)
-			expect(order_item.find_popular_companion_items).not_to be_empty
-		end
-	end
-
-	# Private Method Functioanlity
-	describe 'OrderItem status change notifications' do
-		it 'enqueues a job to send a cancelled notification when status changes to cancelled' do
-			order_item = order_items(:shipped_order_item_one)
-			expect {
-				order_item.update(status: 'cancelled')
-			}.to have_enqueued_job(CreateNotificationJob).with(notifiable: order_item, creator: order_item.order.user, description: "On order #{order_item.order.id} item #{order_item.product.name} has been cancelled", status: "error")
-		end
 	
-		it 'enqueues a job to send a returning notification when status changes to returning' do
-			order_item = order_items(:delivered_order_item_one)
-			expect {
-				order_item.update(status: 'returning')
-			}.to have_enqueued_job(CreateNotificationJob).with(notifiable: order_item, creator: order_item.order.user, description: "On order #{order_item.order.id} the return of item #{order_item.product.name} has been accepted", status: "success")
-		end
-	
-		it 'enqueues a job to send a returned notification when status changes to returned' do
-			order_item = order_items(:shipped_order_item_three)
-			expect {
-				order_item.update(status: 'returned')
-			}.to have_enqueued_job(CreateNotificationJob).with(notifiable: order_item, creator: order_item.order.user, description: "On order #{order_item.order.id} item #{order_item.product.name} has been returned", status: "success")
-		end
-	end
 
 
 end

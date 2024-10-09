@@ -1,5 +1,6 @@
 class Ticket < ApplicationRecord
   include TicketAnalytics
+  
   enum status: {
     new_ticket: 'new_ticket',
     manager_feedback: 'manager_feedback',

@@ -46,22 +46,6 @@ class Order < ApplicationRecord
 		{receipt: receipt, total: total}
 	end
 
-	def inventory_sold
-		self.order_items.each do |item|
-			product = Product.find_by(id: item.product_id)
-			new_inventory_count = product.inventory_count - 1
-			product.update(inventory_count: new_inventory_count)
-		end
-	end
-
-	def inventory_returned
-		self.order_items.each do |item|
-			product = Product.find_by(id: item.product_id)
-			new_inventory_count = product.inventory_count + 1
-			product.update(inventory_count: new_inventory_count)
-		end
-	end
-
 	def handle_status_change
 		notification_details = 
 			case status
@@ -77,15 +61,16 @@ class Order < ApplicationRecord
 				{ description: "Your order #{id} has been delivered", status: "success" }
 			when 'shipped'
 				{ description: "Your order #{id} has been shipped", status: "success" }
+			when "processed"
+				{ description: "Your purchase for order #{id} has been processed", status: "success" }
 			else
 				{ description: "Your order #{id} has been accepted for return.", status: "success" }
 			end
 	
 		send_notification(notification_details)
-		inventory_returned if status == 'returned'
 	end
 
-	private
+  private
 
 	def expected_delivery_date_after_created_at
 		return if created_at.blank?

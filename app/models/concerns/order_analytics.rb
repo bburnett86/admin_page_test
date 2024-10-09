@@ -1,48 +1,32 @@
 module OrderAnalytics
+  include ChartDateGenerator
   extend ActiveSupport::Concern
 
   class_methods do
-		def total
-			Order.all.count
-		end
-
-		def total_orders_before_date(end_date)
-			orders = Order.where('created_at < ?', end_date).count
-			{end_date: end_date, orders: orders}
-		end
-	
-    def total_orders_before_date(end_date)
-      total_orders_by_status_before_date(nil, end_date)
+    def total
+      Order.count
     end
 
-    def total_cancelled_orders_before_date(end_date)
-      total_orders_by_status_before_date(:cancelled, end_date)
-    end
-
-    def total_returned_orders_before_date(end_date)
-      total_orders_by_status_before_date(:returned, end_date)
-    end
-
-    def total_delivered_orders_before_date(end_date)
-      total_orders_by_status_before_date(:delivered, end_date)
-    end
-
-    def total_delayed_orders_before_date(end_date)
-      total_orders_by_status_before_date(:delayed, end_date)
-    end
-
-    def total_shipped_orders_before_date(end_date)
-      total_orders_by_status_before_date(:shipped, end_date)
+    def calculate(status = nil)
+      end_dates = OrderAnalytics.create_chart_dates(7)
+      data = end_dates.map do |end_date|
+        count = if status
+                  Order.before_date(end_date).by_status(status).count
+                else
+                  Order.before_date(end_date).count
+                end
+        { end_date: end_date, status: status || :orders, count: count }
+      end.sort_by { |hash| -hash[:end_date].to_time.to_i }
+      { data: data, name: status || :orders, x_axis_categories: end_dates }
     end
 
     private
 
-    def total_orders_by_status_before_date(status, end_date)
-      query = Order.before_date(end_date)
-      query = query.by_status(status) if !status.nil?
-			status = status.present? ? status : :orders
-      count = query.count
-      {end_date: end_date, status => count}
+    def total_orders_by_status_before_date(status = nil, end_date)
+      raise ArgumentError, "Invalid status type" if !Order.statuses.include?(status) && !status.nil?
+      count = !status.nil? ? Order.before_date(end_date).by_status(status).count : Order.before_date(end_date).count
+      status ||= :orders
+      { end_date: end_date, status: status, count: count }
     end
   end
 end

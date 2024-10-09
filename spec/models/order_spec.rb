@@ -29,24 +29,6 @@ RSpec.describe Order, type: :model do
 		end
 	end
 
-  describe '#inventory_sold' do
-    it 'decreases the product inventory by the ordered quantity' do
-      order = orders(:pending_order)
-      product = products(:product_one)
-      
-      expect { order.inventory_sold }.to change { product.reload.inventory_count }.by(-1)
-    end
-  end
-
-  describe '#inventory_returned' do
-    it 'increases the product inventory by the returned quantity' do
-      order = orders(:returned_order)
-      product = products(:product_one)
-      
-      expect { order.inventory_returned }.to change { product.reload.inventory_count }.by(1)
-    end
-  end
-
   # Private Method Functionality
   describe 'expected_delivery_date validation' do
     it 'is invalid if the expected_delivery_date is before the creation date for statuses other than pending, cancelled, delivered, returned, or returning' do

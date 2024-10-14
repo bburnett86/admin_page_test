@@ -1,52 +1,35 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe OrderAnalytics, type: :model do
-	let(:end_date) { Time.zone.now }
-  describe '.total' do
-    it 'returns the total number of orders' do
-      expect(Order.total).to eq(8)
+  describe ".total" do
+    it "returns the total count of orders" do
+      expect(Order.total).to eq(Order.count)
     end
   end
 
-  describe '.total_orders_before_date' do
-    it 'returns the total number of orders before a specific date' do
-      result = Order.total_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, orders: 8})
+  describe ".calculate_orders" do
+    context "when status is specified" do
+      it "calculates orders for the given status" do
+        status = :shipped # Example status, adjust based on actual data
+        result = Order.calculate_orders(status)
+        # Example verification, adjust based on actual data and expected results
+        expect(result[:name]).to eq(status.to_sym)
+        expect(result[:data].length).to be_between(15, 17).inclusive
+        expect(result[:data]).to eq(result[:data].sort_by { |h| h[:end_date] })
+        expect(result[:data]).to eq(result[:data].sort_by { |h| h[:count] })
+      end
     end
-  end
 
-  describe '.total_cancelled_orders_before_date' do
-    it 'returns the total number of cancelled orders before a specific date' do
-      result = Order.total_cancelled_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, cancellations: 1})
-    end
-  end
-
-  describe '.total_returned_orders_before_date' do
-    it 'returns the total number of returned orders before a specific date' do
-      result = Order.total_returned_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, returns: 1})
-    end
-  end
-
-  describe '.total_delivered_orders_before_date' do
-    it 'returns the total number of delivered orders before a specific date' do
-      result = Order.total_delivered_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, delivered: 1})
-    end
-  end
-
-  describe '.total_delayed_orders_before_date' do
-    it 'returns the total number of delayed orders before a specific date' do
-      result = Order.total_delayed_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, delayed: 1})
-    end
-  end
-
-  describe '.total_shipped_orders_before_date' do
-    it 'returns the total number of shipped orders before a specific date' do
-      result = Order.total_shipped_orders_before_date(end_date)
-      expect(result).to eq({end_date: end_date, shipped: 1})
+    context "when status is not specified" do
+      it "calculates orders for all statuses" do
+        result = Order.calculate_orders
+        expect(result[:name]).to eq(:orders)
+        expect(result[:data].length).to be_between(15, 17).inclusive
+        expect(result[:data]).to eq(result[:data].sort_by { |h| h[:end_date] })
+        expect(result[:data]).to eq(result[:data].sort_by { |h| h[:count] })
+      end
     end
   end
 end

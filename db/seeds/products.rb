@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 40.times do
   unique_name = false
-  name = ''
+  name = ""
 
-  while !unique_name
+  until unique_name
     name = Faker::Commerce.product_name
     unique_name = !Product.exists?(name: name)
   end

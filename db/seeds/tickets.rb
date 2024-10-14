@@ -1,10 +1,12 @@
-non_admin_users = User.where.not(role: 'admin')
+# frozen_string_literal: true
+
+non_admin_users = User.where.not(role: "admin")
 admin_users = User.where(role: "admin")
 
 600.times do
   description = Faker::Lorem.paragraph(sentence_count: 2)
-	status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
-	date = rand(8.months).seconds.ago
+  status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
+  date = rand(8.months).seconds.ago
   new_date = date + 2.weeks
   ticket = Ticket.new(
     ticketable: OrderItem.order("RANDOM()").first,
@@ -23,8 +25,8 @@ end
 
 200.times do
   description = Faker::Lorem.paragraph(sentence_count: 2)
-	status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
-	date = rand(8.months).seconds.ago
+  status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
+  date = rand(8.months).seconds.ago
   new_date = date + 2.weeks
   ticket = Ticket.new(
     ticketable: Order.order("RANDOM()").first,
@@ -43,8 +45,8 @@ end
 
 200.times do
   description = Faker::Lorem.paragraph(sentence_count: 2)
-	status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
-	date = rand(8.months).seconds.ago
+  status = %w[new_ticket manager_feedback processing awaiting_feedback approved no_action_required].sample
+  date = rand(8.months).seconds.ago
   new_date = date + 2.weeks
   ticket = Ticket.new(
     ticketable: Product.order("RANDOM()").first,

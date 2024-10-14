@@ -89,7 +89,7 @@ cancelled_order_item_one:
 
 cancelled_order_item_two:
   order: cancelled_order
-  product: product_two
+  product: product_one
   cost: 15.00
   current_price: 30.00
   sale_price: 25.00

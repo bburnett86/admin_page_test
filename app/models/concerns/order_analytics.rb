@@ -1,39 +1,25 @@
+# frozen_string_literal: true
+
 module OrderAnalytics
   extend ActiveSupport::Concern
 
   class_methods do
-		def total
-			Order.all.count
-		end
+    def total
+      Order.count
+    end
 
-		def total_orders_before_date(end_date)
-			orders = Order.where('created_at < ?', end_date).count
-			{end_date: end_date, orders: orders}
-		end
-	
-		def total_cancelled_orders_before_date(end_date)
-			cancellations = Order.where('created_at < ?', end_date).where(status: 'cancelled').count
-			{end_date: end_date, cancellations: cancellations}
-		end
-	
-		def total_returned_orders_before_date(end_date)
-			returns = Order.where('created_at < ?', end_date).where(status: 'returned').count
-			{end_date: end_date, returns: returns}
-		end
-	
-		def total_delivered_orders_before_date(end_date)
-			delivered = Order.where('created_at < ?', end_date).where(status: 'delivered').count
-			{end_date: end_date, delivered: delivered}
-		end
-	
-		def total_delayed_orders_before_date(end_date)
-			delayed = Order.where('created_at < ?', end_date).where(status: 'delayed').count
-			{end_date: end_date, delayed: delayed}
-		end
-	
-		def total_shipped_orders_before_date(end_date)
-			shipped = Order.where('created_at < ?', end_date).where(status: 'shipped').count
-			{end_date: end_date, shipped: shipped}
-		end		
+    def calculate_orders(status = nil)
+      end_dates = Order.create_chart_dates(7)
+      data = end_dates.map do |end_date|
+        count = if status
+                  Order.before_date(end_date).by_status(status).count
+                else
+                  Order.before_date(end_date).count
+                end
+        { end_date: end_date, status: status || :orders, count: count }
+      end.sort_by { |hash| hash[:end_date].to_time.to_i }
+
+      { data: data, name: status || :orders, x_axis_categories: end_dates }
+    end
   end
 end

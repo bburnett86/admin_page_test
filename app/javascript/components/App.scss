@@ -1,0 +1,159 @@
+@import "playbook-ui/dist/tokens/screen_sizes.scss";
+
+.dashboard-container {
+  margin-bottom: 5rem !important;
+  .nav-bar-header-desktop {
+    .admin-background {
+      .navs-container {
+        flex-direction: column !important;
+        .nav-container {
+          padding-left: 10vw !important;
+          flex-direction: column !important;
+        }
+        #NavBarComponent {
+          width: 90vw !important;
+          padding-left: 10vw !important;
+          .nav-bar{
+            width: 100%;
+            flex-direction: "column";
+            .nav-bar__content{
+              width: 100%;
+              .nav_bar__logo_icon{
+                padding-top: 1.3vh;
+              }
+              .nav-bar__logo{
+                flex-direction: column;
+              }
+              @media (max-width: 768px) {
+                .nav-bar__status-container{
+                  height: 8vh;
+                  width: 60vw;
+                }
+              }
+              @media (min-width: 769px) {
+                .nav-bar__status-container{
+                  height: 8vh;
+                  width: 30vw;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  .body-container {
+    margin-left: 10vw !important;
+  }
+
+  #KeyPerformanceIndicatorsComponent {
+    width: 80vw !important;
+  }
+  .escalations-container {
+    @media (max-width: 768px) {
+      .layout_body {
+        width: 80vw !important;
+        height: 38rem !important;
+      }
+    }
+    @media (min-width: 769px) {
+      .layout_body {
+        height: 100% !important;
+        width: 16.05vw !important;
+        .card-header {
+          height: 80px !important;
+        }
+        .first-column {
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .row-container {
+      width: 80vw;
+      display: block;
+  
+      #PipelineChartComponent {
+        width: 80vw !important;
+        margin-bottom: 2rem;
+        .pipeline-chart-container {
+          height: 30rem !important;
+          .pipeline-chart-label{
+            width: 13vw !important;
+          }
+        }
+      }
+  
+      #IconGridComponent {
+        width: 80vw !important;
+        .iron-grid-container{
+          height: 15rem !important;
+          align-content: center;
+          .iron-grid-item {
+            width: 20vw !important;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 769px) {
+    .row-container {
+      width: 80vw;
+      justify-content: space-between;
+  
+      #PipelineChartComponent {
+        width: 39.5vw !important;
+        .pipeline-chart-container {
+          height: 30rem !important;
+          .pipeline-chart-label{
+            width: 3vw !important;
+          }
+        }
+      }
+  
+      #IconGridComponent {
+        width: 39.5vw !important;
+        .iron-grid-container{
+          height: 15rem !important;
+          align-content: center;
+          .iron-grid-item {
+            width: 8vw !important;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+// [data-react-class="IconGrid"] {
+//   height:27.1875rem !important;
+//   width:27.5rem;
+//   .pb_card_kit_deselected_border_none_border_radius_md {
+//     height: 100% !important;
+//     .pb_card_body_kit {
+//       .pb_flex_kit_orientation_row_justify_content_center_align_items_top_wrap_spacing_evenly {
+//         .pb_flex_item_kit{
+//           height: 200px !important;
+//           display: "inline-flex" !important;
+//           .pb_flex_item_kit_size_2 {
+//             flex-basis: 0 !important;
+//             [class^="pb_title_kit"][class*="_2"] {
+//               font-weight: 400 !important;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// [data-react-class="PipelineChart"] {
+//   height:27.1875rem !important;
+//   width:27.5rem !important;
+// }

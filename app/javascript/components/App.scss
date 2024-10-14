@@ -57,6 +57,9 @@
       .layout_body {
         width: 80vw !important;
         height: 38rem !important;
+        .full-width {
+          width: 100% !important;
+        }
       }
     }
     @media (min-width: 769px) {
@@ -66,8 +69,8 @@
         .card-header {
           height: 80px !important;
         }
-        .first-column {
-          margin-left: 0 !important;
+        .full-width {
+          width: 100% !important;
         }
       }
     }
@@ -111,7 +114,7 @@
         .pipeline-chart-container {
           height: 30rem !important;
           .pipeline-chart-label{
-            width: 3vw !important;
+            width: 5vw !important;
           }
         }
       }
@@ -130,30 +133,3 @@
   }
 
 }
-
-
-// [data-react-class="IconGrid"] {
-//   height:27.1875rem !important;
-//   width:27.5rem;
-//   .pb_card_kit_deselected_border_none_border_radius_md {
-//     height: 100% !important;
-//     .pb_card_body_kit {
-//       .pb_flex_kit_orientation_row_justify_content_center_align_items_top_wrap_spacing_evenly {
-//         .pb_flex_item_kit{
-//           height: 200px !important;
-//           display: "inline-flex" !important;
-//           .pb_flex_item_kit_size_2 {
-//             flex-basis: 0 !important;
-//             [class^="pb_title_kit"][class*="_2"] {
-//               font-weight: 400 !important;
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-// [data-react-class="PipelineChart"] {
-//   height:27.1875rem !important;
-//   width:27.5rem !important;
-// }

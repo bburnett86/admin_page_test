@@ -7,7 +7,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-
       ## User attributes
       t.string :first_name, null: false, default: ""
       t.string :last_name, null: false, default: ""
@@ -38,6 +37,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
     add_index :users, :last_name
 
     # Add a combined index for both first_name and last_name
-    add_index :users, [:first_name, :last_name]
+    add_index :users, %i[first_name last_name]
   end
 end

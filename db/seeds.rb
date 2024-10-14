@@ -11,5 +11,5 @@ seed_files = %w[
 ]
 
 seed_files.each do |seed|
-  load Rails.root.join('db', 'seeds', "#{seed}.rb")
+  load Rails.root.join("db", "seeds", "#{seed}.rb")
 end

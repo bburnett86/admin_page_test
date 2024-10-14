@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAssignedToAndCreatorToTickets < ActiveRecord::Migration[7.0]
   def change
     add_column :tickets, :assigned_to, :integer

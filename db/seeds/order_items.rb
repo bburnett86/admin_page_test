@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 Order.find_each do |order|
   number_of_items = rand(3..10)
 
   number_of_items.times do
     product = Product.order("RANDOM()").first
 
-    status = 
-      if order.status == 'delivered' && rand(1..5) == 1
-        'returned'
+    status =
+      if order.status == "delivered" && rand(1..5) == 1
+        "returned"
       else
         order.status
       end
@@ -21,7 +23,7 @@ Order.find_each do |order|
       current_price: product.current_price,
       sale_price: product.sale_price,
       percentage_off: product.percentage_off,
-      expected_delivery_date: order.expected_delivery_date,
+      expected_delivery_date: order.expected_delivery_date
     )
   end
 end

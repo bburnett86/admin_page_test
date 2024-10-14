@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
@@ -6,5 +8,5 @@ class Notification < ApplicationRecord
   validates :status, presence: true
   validates :user_id, presence: true
 
-  enum notification_status: { new_notification: 'new_notification', read: 'read', archived: 'archived' }, _prefix: :status, _default: 'new_notification'
+  enum notification_status: { new_notification: "new_notification", read: "read", archived: "archived" }, _prefix: :status, _default: "new_notification"
 end

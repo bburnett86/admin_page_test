@@ -15,13 +15,15 @@ gem "webpacker"
 
 gem "sass-rails"
 
-gem 'devise'
+gem "devise"
 
-gem 'sidekiq'
+gem "devise_token_auth"
 
-gem 'faker'
+gem "sidekiq"
 
-gem 'rubocop', require: false
+gem "faker"
+
+gem "rubocop", require: false
 
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
@@ -67,8 +69,8 @@ gem "playbook_ui", "~> 13.27.0"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 5.0'
-  gem 'shoulda-matchers', '~> 4.5', require: false
+  gem "rspec-rails", "~> 5.0"
+  gem "shoulda-matchers", "~> 4.5", require: false
 end
 
 group :development do

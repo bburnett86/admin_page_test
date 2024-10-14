@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  include DeviseTokenAuth::Concerns::User
 
   has_many :orders
-  has_many :assigned_tickets, class_name: 'Ticket', foreign_key: 'assigned_to'
-  has_many :created_tickets, class_name: 'Ticket', foreign_key: 'creator'
+  has_many :assigned_tickets, class_name: "Ticket", foreign_key: "assigned_to"
+  has_many :created_tickets, class_name: "Ticket", foreign_key: "creator"
   has_many :notifications
 
   validates :first_name, :last_name, presence: true, length: { minimum: 3 }
@@ -16,14 +19,14 @@ class User < ApplicationRecord
     standard: "standard",
     customer_service: "customer service",
     manager: "manager",
-    admin: "admin"
-  }, default: :standard, _prefix: true,  validate: true
+    admin: "admin",
+  }, default: :standard, _prefix: true, validate: true
 
-  private
+private
 
   def password_complexity
-    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/ 
+    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
 
-    errors.add :password, 'Complexity requirement not met. Length should be 8-30 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+    errors.add :password, "Complexity requirement not met. Length should be 8-30 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character"
   end
 end

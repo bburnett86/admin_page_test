@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -21,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_194130) do
     t.integer "notifiable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[notifiable_type notifiable_id], name: "index_notifications_on_notifiable"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -81,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_194130) do
     t.index ["assigned_to_id"], name: "index_tickets_on_assigned_to_id"
     t.index ["creator"], name: "index_tickets_on_creator"
     t.index ["creator_id"], name: "index_tickets_on_creator_id"
-    t.index %w[ticketable_type ticketable_id], name: "index_tickets_on_ticketable"
+    t.index ["ticketable_type", "ticketable_id"], name: "index_tickets_on_ticketable"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,7 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_07_194130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index %w[first_name last_name], name: "index_users_on_first_name_and_last_name"
+    t.index ["first_name", "last_name"], name: "index_users_on_first_name_and_last_name"
     t.index ["first_name"], name: "index_users_on_first_name"
     t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

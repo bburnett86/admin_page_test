@@ -2,14 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import KeyPerformanceIndicators from '../components/Dashboard/KeyPerformanceIndicators/KeyPerformanceIndicators';
 
+const getCSRFToken = () => {
+  return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+};
+
 const fetchData = async (url) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'X-CSRF-Token': getCSRFToken(),
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin' // Ensure cookies are sent with the request
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    const data = await response.json();
+    console.log('Fetched data:', data); // Log the fetched data
+    return data;
   } catch (error) {
+    console.log(url);
     console.error('Error fetching data:', error);
     return null;
   }

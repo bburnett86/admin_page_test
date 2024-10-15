@@ -3,7 +3,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  include DeviseTokenAuth::Concerns::User
 
   has_many :orders
   has_many :assigned_tickets, class_name: "Ticket", foreign_key: "assigned_to"

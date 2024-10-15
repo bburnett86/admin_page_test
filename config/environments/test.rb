@@ -13,6 +13,11 @@ Rails.application.configure do
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
   config.cache_classes = true
 
+# config/environments/test.rb
+config.IPINFO_API_TOKEN = ENV['IPINFO_API_TOKEN']
+config.OPENWEATHER_API_KEY = ENV['OPENWEATHER_API_KEY']
+
+
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration
   # system, or in some way before deploying your code.

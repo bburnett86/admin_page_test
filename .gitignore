@@ -21,3 +21,8 @@ log/development.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore environment variable files
+.env
+.env.development
+.env.test

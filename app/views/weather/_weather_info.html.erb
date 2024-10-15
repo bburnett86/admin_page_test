@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <div>
+      <% if @error %>
+        <div>
+          <p>Error: <%= @error %></p>
+        </div>
+      <% elsif @weather %>
+        <div>
+          <h1>Weather Information</h1>
+        </div>
+        <div>
+          <p>Location: <%= @weather['name'] %></p>
+          <p>Temperature: <%= @weather['main']['temp'] %>°C</p>
+          <p>Weather: <%= @weather['weather'][0]['description'] %></p>
+        </div>
+      <% else %>
+        <div>
+          <p>Weather information is currently unavailable.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,12 +8,12 @@ non_admin_users.each do |user|
     expected_delivery_date = nil
 
     status =
-      if (Date.today - created_at_datetime.to_date).to_i > 30
+      if (Date.today - created_at_datetime.to_date).to_i > 45
         %w[delivered cancelled returned].sample
-      elsif (Date.today - created_at_datetime.to_date).to_i > 14
-        %w[delayed returning delivered cancelled returning].sample # Removed duplicate 'returning'
+      elsif (Date.today - created_at_datetime.to_date).to_i > 30
+        %w[delayed returning delivered cancelled returning ].sample # Removed duplicate 'returning'
       else
-        %w[pending shipped processed].sample
+        %w[pending shipped processed add_to_cart shopping_cart payment_methods delivery_methods confirm_order].sample
       end
 
     case status
@@ -21,9 +21,9 @@ non_admin_users.each do |user|
       expected_delivery_date = created_at_datetime + 17.days
     when "shipping"
       expected_delivery_date = created_at_datetime + 14.days
-    when "delayed"
+    when "delayed", "cancelled", "delivered", "returned", "returning"
       expected_delivery_date = created_at_datetime + 8.days
-    when "pending", "cancelled", "delivered", "returned", "returning"
+    when "add_to_cart", "shopping_cart", "payment_methods", "delivery_methods", "confirm_order", "pending"
       expected_delivery_date = nil
     end
 

@@ -8,6 +8,7 @@ module ProductsAnalytics
       raise ArgumentError, "excluded_types must be an array" unless excluded_types.is_a?(Array)
 
       types = %i[revenue cost profit average_check repeat_sales cancelled orders]
+      excluded_types = excluded_types.map(&:to_sym) # Convert to symbols
 
       raise ArgumentError, "Invalid excluded_types" unless (excluded_types - types).empty?
 
@@ -23,11 +24,10 @@ module ProductsAnalytics
 
       raise ArgumentError, "Invalid type" unless %i[revenue cost profit average_check repeat_sales cancelled orders].include?(type) || OrderItem.statuses.keys.include?(type)
 
-
-        end_dates = Product.create_chart_dates(7)
-        data = end_dates.map do |end_date|
+      end_dates = Product.create_chart_dates(7)
+      data = end_dates.map do |end_date|
         raise ArgumentError, "Invalid end_date" unless end_date.is_a?(Date)
-
+      
         case type
         when :revenue, :cost, :profit
           calculate_economic_totals_by_type(type, end_date)
@@ -43,7 +43,9 @@ module ProductsAnalytics
           raise ArgumentError, "Invalid type"
         end
       end
-      totals = data.sort_by { |hash| hash[:end_date].to_time.to_i }.map { |hash| hash[type].to_i }
+      
+      # Ensure the value is a valid number before converting to integer
+      totals = data.sort_by { |hash| hash[:end_date].to_time.to_i }.map { |hash| hash[type].to_f.nan? ? 0 : hash[type].to_i }
       { data: totals, name: type, x_axis_categories: end_dates }
     end
 
@@ -76,19 +78,9 @@ module ProductsAnalytics
       res = []
       target = target.to_sym if target.is_a?(String)
 
-      selected_statuses = %i[add_to_cart
-                             shopping_cart
-                             payment_methods
-                             delivery_methods
-                             confirm_order
-                             pending
-                             processed
-                             shipped
-                             cancelled
-                             delivered
-                             returned
-                             delayed
-                             returning]
+      selected_statuses = %i[add_to_cart shopping_cart payment_methods delivery_methods confirm_order pending processed shipped cancelled delivered returned delayed returning]
+
+      raise ArgumentError, "Invalid target" unless selected_statuses.include?(target)
 
       index = selected_statuses.index(target)
       selected_statuses = selected_statuses.slice(0..index)

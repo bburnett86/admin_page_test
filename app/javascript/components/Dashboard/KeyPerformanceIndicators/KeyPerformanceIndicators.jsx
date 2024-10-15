@@ -4,18 +4,34 @@ import WebpackerReact from 'webpacker-react'
 import { LineGraph, Nav, NavItem, Layout, Body, Flex, FlexItem, SectionSeparator, Background, CircleIconButton, Title, StatChange } from 'playbook-ui'
 import { useState, useEffect } from 'react'
 
-const KeyPerformanceIndicators = (props) => {
-  const [active, setActive] = useState("revenue")
-  const [displayData, setDisplayData] = useState({name: "", data: []})
-  const [xAxisCategories, setXAxisCategories] = useState(props[0].x_axis_categories)
-const [revenue, setRevenue] = useState({ percentage: 0, direction: "" });
-const [orders, setOrders] = useState({ percentage: 0, direction: "" });
-const [profit, setProfit] = useState({ percentage: 0, direction: "" });
-const [cancelled, setCancelled] = useState({ percentage: 0, direction: "" });
-const [repeatSales, setRepeatSales] = useState({ percentage: 0, direction: "" });
+const fetchData = async (type) => {
+  try {
+    const response = await fetch(`/admin/products_analytics/line_graph_data?type=${type}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data["display_data"])
+    return data["display_data"];
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+};
 
-const performance = () => {
-  Object.entries(props).forEach(([key, value]) => {
+const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
+  const [active, setActive] = useState("revenue")
+  const [displayData, setDisplayData] = useState(line_graph_data)
+  const xAxisCategories = display_data.x_axis_categories
+  const [revenue, setRevenue] = useState({ percentage: 0, direction: "" });
+  const [orders, setOrders] = useState({ percentage: 0, direction: "" });
+  const [profit, setProfit] = useState({ percentage: 0, direction: "" });
+  const [cancelled, setCancelled] = useState({ percentage: 0, direction: "" });
+  const [repeatSales, setRepeatSales] = useState({ percentage: 0, direction: "" });
+  
+
+  const performance = () => {
+    Object.values(display_data).forEach((value) => {
     const filteredData = value.data;
     const performanceValue = filteredData[filteredData.length - 1] - filteredData[filteredData.length - 2];
     var percentage = Math.round((performanceValue / filteredData[0]) * 100);
@@ -40,9 +56,9 @@ const performance = () => {
         break;
       default:
         break;
-    }
-  });
-};
+      }
+    });
+  };
 
   const handleSetActive = (value) => {
     if (["revenue", "orders", "profit", "average_check", "cancelled", "repeat_sales"].includes(value)) {
@@ -51,15 +67,18 @@ const performance = () => {
   };
 
   const setData = (value) => {
-    const filtered = Object.values(props).find(item => item.name === value);
-    setDisplayData({name: value, data: filtered.data});
-    setXAxisCategories(filtered.x_axis_categories);
+    fetchData(value).then((data) => 
+      setDisplayData({name: data["name"], data: data["data"]})
+    );
   }
   
   useEffect(() => {
-    performance();
     setData(active);
   }, [active]);
+
+  useEffect(() => {
+    performance();
+  }, [displayData]);
 
   
   return(

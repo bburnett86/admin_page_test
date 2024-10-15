@@ -19,10 +19,13 @@ module ProductsAnalytics
 
     # All Product Sales Totals For One Economic Type Types
     def calculate_products_finance_line_graph_data_by_time(type = :revenue)
+      type = type.to_sym unless type.is_a?(Symbol)
+
       raise ArgumentError, "Invalid type" unless %i[revenue cost profit average_check repeat_sales cancelled orders].include?(type) || OrderItem.statuses.keys.include?(type)
 
-      end_dates = Product.create_chart_dates(7)
-      data = end_dates.map do |end_date|
+
+        end_dates = Product.create_chart_dates(7)
+        data = end_dates.map do |end_date|
         raise ArgumentError, "Invalid end_date" unless end_date.is_a?(Date)
 
         case type

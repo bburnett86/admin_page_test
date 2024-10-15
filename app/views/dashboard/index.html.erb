@@ -16,7 +16,7 @@
 		<%= pb_rails("flex/flex_item", props: { classname: "content-container" }) do %>
 			<%= pb_rails("caption", props: { padding_bottom: "xs", padding_top: "sm", text: "Dashboard" }) %>
 			<%= pb_rails("title", props: { text: "Commerce Dashboard", tag: "h2", size: 2, bold: false, padding_bottom: "lg" }) %>
-			<div id="KeyPerformanceIndicatorsComponent" data-props="<%= @line_chart_data.to_json %>"></div>
+			<div id="KeyPerformanceIndicatorsComponent"></div>
 			<%= javascript_pack_tag 'key_performance_indicators' %>
 		<% end %>
 		<%= pb_rails("flex", props: { classname: "content-container" }) do %>

@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products_analytics, only: [] do
       collection do
+        get "line_graph_data"
         get "calculate_multiple_finance_line_graph_metrics"
-        get "calculate_pipeline_chart_metrics"
       end
     end
 

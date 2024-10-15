@@ -19,9 +19,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  config.IPINFO_API_TOKEN = "16aca042ef9746"
-
-  config.OPENWEATHER_API_KEY = "d12fc7930d7ced66c58bd3d288d27629"
+# config/environments/development.rb
+config.IPINFO_API_TOKEN = ENV['IPINFO_API_TOKEN']
+config.OPENWEATHER_API_KEY = ENV['OPENWEATHER_API_KEY']
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

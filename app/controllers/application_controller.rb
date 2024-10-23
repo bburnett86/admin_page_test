@@ -2,7 +2,7 @@
 
 class ApplicationController < ActionController::Base
   helper Playbook::PbKitHelper
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index; end
 

@@ -11,7 +11,6 @@ const fetchData = async (type) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data["display_data"])
     return data["display_data"];
   } catch (error) {
     console.error('Error fetching data:', error);

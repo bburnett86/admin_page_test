@@ -29,6 +29,7 @@ const GridRowFill = ({ data }) => (
 )
 
 const IconGrid = (props) => {
+	console.log(props);
 	const gridData = [
 		{ icon: 'fa-solid fa-ticket', variant: 'green', size: 'md', text: 'Tickets (YTD)', value: props.total },
 		{ icon: 'times-square', variant: 'red', size: 'md', text: 'Overdue', value: props.overdue },

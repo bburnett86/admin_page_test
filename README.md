@@ -18,6 +18,12 @@ Now we can get started installing and running the application. Carefully review 
 
 ### Run the Application
 
+1. rails db:create
+1. rails db:migrate
+1. rails db: seed
+
+1. Create .env files and add proper keys.
+
 1. `yarn watch` will take care of any React component changes
 1. `bin/rails s` will start the Rails application
 1. Navigate to [localhost:3000](http://localhost:3000)

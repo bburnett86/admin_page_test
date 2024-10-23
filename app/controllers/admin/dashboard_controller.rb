@@ -2,7 +2,7 @@
 
 module Admin
   class DashboardController < ApplicationController
-    before_action :validate_admin
+    # before_action :validate_admin
     
     def index
       @line_chart_data = Product.calculate_multiple_finance_line_graph_metrics
@@ -13,7 +13,7 @@ module Admin
       @awaiting_feedback = this_weeks_escalations["awaiting_feedback"]
       @approved = this_weeks_escalations["approved"]
       @pipeline_chart_data = Product.calculate_pipeline_chart_metrics(:pending)
-      @icon_grid_data = Ticket.calculate_ticket_totals
+      @icon_grid_data = Ticket.calculate_ticket_totals(12)
     end
   end
 end

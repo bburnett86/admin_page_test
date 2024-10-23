@@ -27,3 +27,7 @@ Now we can get started installing and running the application. Carefully review 
 1. `yarn watch` will take care of any React component changes
 1. `bin/rails s` will start the Rails application
 1. Navigate to [localhost:3000](http://localhost:3000)
+
+Testing
+bundle exec rspec .
+

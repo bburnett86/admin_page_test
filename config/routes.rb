@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'sessions'
   }
-  get "pages", to: "pages#index"
+  # get "pages", to: "pages#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

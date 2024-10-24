@@ -28,6 +28,14 @@ Now we can get started installing and running the application. Carefully review 
 1. `bin/rails s` will start the Rails application
 1. Navigate to [localhost:3000](http://localhost:3000)
 
+Check the seed data to login as admin@user.com. If you for whatever reason get a 401 attempting to login with the informaiton available then
+
+rails c
+user = User.find_by(email: 'admin@user.com)
+user.update(password: "NewSecurePassword1!", password_confirmation: "NewSecurePassword1!")
+
+And attempt to login with new password.
+
 Testing
 bundle exec rspec .
 

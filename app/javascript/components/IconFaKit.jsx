@@ -3,7 +3,6 @@ import {Icon} from 'playbook-ui';
 import "../../assets/icons/all.min.js"
 
 const IconFaKit = (props) => {
-  console.log(props.icon)
   return (
     <Icon
       fixedWidth

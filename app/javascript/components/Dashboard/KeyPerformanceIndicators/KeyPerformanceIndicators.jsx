@@ -139,10 +139,10 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
                   </Title>
                 </FlexItem>
                 <FlexItem>
-                <StatChange
-                  value={revenue.percentage}
-                  change={revenue.direction}
-                />
+                  <StatChange
+                    value={revenue.percentage}
+                    change={revenue.direction}
+                  />
                 </FlexItem>
               </Flex>
             </NavItem>
@@ -156,10 +156,10 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
                   </Title>
                 </FlexItem>
                 <FlexItem>
-                <StatChange
-                  value={orders.percentage}
-                  change={orders.direction}
-                />
+                  <StatChange
+                    value={orders.percentage}
+                    change={orders.direction}
+                  />
                 </FlexItem>
               </Flex>
             </NavItem>
@@ -173,10 +173,10 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
                   </Title>
                 </FlexItem>
                 <FlexItem>
-                <StatChange
-                  value={profit.percentage}
-                  change={profit.direction}
-                />
+                  <StatChange
+                    value={profit.percentage}
+                    change={profit.direction}
+                  />
                 </FlexItem>
               </Flex>
             </NavItem>
@@ -202,10 +202,10 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
                   </Title>
                 </FlexItem>
                 <FlexItem>
-                <StatChange
-                  value={cancelled.percentage}
-                  change={cancelled.direction}
-                />
+                  <StatChange
+                    value={cancelled.percentage}
+                    change={cancelled.direction}
+                  />
                 </FlexItem>
               </Flex>
             </NavItem>
@@ -219,10 +219,10 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
                   </Title>
                 </FlexItem>
                 <FlexItem>
-                <StatChange
-                  value={repeatSales.percentage}
-                  change={repeatSales.direction}
-                />
+                  <StatChange
+                    value={repeatSales.percentage}
+                    change={repeatSales.direction}
+                  />
                 </FlexItem>
               </Flex>
             </NavItem>

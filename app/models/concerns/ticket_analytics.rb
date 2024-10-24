@@ -65,7 +65,7 @@ module TicketAnalytics
     end
 
     def filter_by_timeframe(tickets, timeframe)
-      timeframe ? tickets.where("created_at >= ?", Time.now - timeframe.days) : tickets
+      timeframe ? tickets.where("created_at >= ?", Time.now - timeframe.months) : tickets
     end
   end
 end

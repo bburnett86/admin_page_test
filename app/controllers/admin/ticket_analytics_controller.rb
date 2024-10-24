@@ -2,7 +2,7 @@
 
 module Admin
   class TicketAnalyticsController < ApplicationController
-    # before_action :validate_admin
+    before_action :validate_admin
 
     def sorted_tickets_by_status
       excluded_statuses = params[:status].split(",") if params[:status]

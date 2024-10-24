@@ -2,7 +2,7 @@
 
 module Admin
   class DashboardController < ApplicationController
-    # before_action :validate_admin
+    before_action :validate_admin
     
     def index
       @line_chart_data = Product.calculate_multiple_finance_line_graph_metrics

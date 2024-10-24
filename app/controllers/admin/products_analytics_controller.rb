@@ -1,6 +1,6 @@
 module Admin
   class ProductsAnalyticsController < ApplicationController
-    # before_action :validate_admin
+    before_action :validate_admin
 
     def line_graph_data
       type = params[:type] || "revenue"

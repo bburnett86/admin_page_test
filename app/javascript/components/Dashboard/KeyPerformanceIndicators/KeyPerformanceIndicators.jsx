@@ -21,13 +21,17 @@ const fetchData = async (type) => {
 const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
   const [active, setActive] = useState("revenue")
   const [displayData, setDisplayData] = useState(line_graph_data)
-  const xAxisCategories = display_data.x_axis_categories
+  const xAxisCategories = line_graph_data.x_axis_categories
   const [revenue, setRevenue] = useState({ percentage: 0, direction: "" });
   const [orders, setOrders] = useState({ percentage: 0, direction: "" });
   const [profit, setProfit] = useState({ percentage: 0, direction: "" });
   const [cancelled, setCancelled] = useState({ percentage: 0, direction: "" });
-  const [repeatSales, setRepeatSales] = useState({ percentage: 0, direction: "" });
-  
+  const [repeatSales, setRepeatSales] = useState({ percentage: 0, direction: "" });  
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' });
+  };
 
   const performance = () => {
     Object.values(display_data).forEach((value) => {

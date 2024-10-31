@@ -19,7 +19,6 @@ const fetchData = async (url) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('Fetched data:', data); // Log the fetched data
     return data;
   } catch (error) {
     console.log(url);

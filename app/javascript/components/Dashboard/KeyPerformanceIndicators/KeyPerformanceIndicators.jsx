@@ -39,7 +39,7 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
       const newValue = filteredData[filteredData.length - 1];
       const oldValue = filteredData[filteredData.length - 2];
       const performanceValue = newValue - oldValue;
-      const percentageChange = ((performanceValue / oldValue) * 100).toFixed(0);
+      const percentageChange = ((performanceValue / oldValue) * 100).toFixed(2);
       const direction = performanceValue > 0 ? "increase" : "decrease";
   
       switch (value.name) {
@@ -89,7 +89,7 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
 
   useEffect(() => {
     performance();
-  }, [displayData]);
+  }, []);
 
   
   return(

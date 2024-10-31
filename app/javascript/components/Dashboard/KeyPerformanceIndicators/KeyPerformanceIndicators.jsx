@@ -35,30 +35,31 @@ const KeyPerformanceIndicators = ({ line_graph_data, display_data }) => {
 
   const performance = () => {
     Object.values(display_data).forEach((value) => {
-    const filteredData = value.data;
-    const performanceValue = filteredData[filteredData.length - 1] - filteredData[filteredData.length - 2];
-    var percentage = Math.round((performanceValue / filteredData[0]) * 100);
-    percentage = percentage < 0 ? -percentage : percentage;
-    const direction = performanceValue > 0 ? "increase" : "decrease";
-
-    switch (value.name) {
-      case 'revenue':
-        setRevenue({ percentage, direction });
-        break;
-      case 'orders':
-        setOrders({ percentage, direction });
-        break;
-      case 'profit':
-        setProfit({ percentage, direction });
-        break;
-      case 'cancelled':
-        setCancelled({ percentage, direction });
-        break;
-      case 'repeat_sales':
-        setRepeatSales({ percentage, direction });
-        break;
-      default:
-        break;
+      const filteredData = value.data;
+      const newValue = filteredData[filteredData.length - 1];
+      const oldValue = filteredData[filteredData.length - 2];
+      const performanceValue = newValue - oldValue;
+      const percentageChange = ((performanceValue / oldValue) * 100).toFixed(0);
+      const direction = performanceValue > 0 ? "increase" : "decrease";
+  
+      switch (value.name) {
+        case 'revenue':
+          setRevenue({ percentage: Math.abs(percentageChange), direction });
+          break;
+        case 'orders':
+          setOrders({ percentage: Math.abs(percentageChange), direction });
+          break;
+        case 'profit':
+          setProfit({ percentage: Math.abs(percentageChange), direction });
+          break;
+        case 'cancelled':
+          setCancelled({ percentage: Math.abs(percentageChange), direction });
+          break;
+        case 'repeat_sales':
+          setRepeatSales({ percentage: Math.abs(percentageChange), direction });
+          break;
+        default:
+          break;
       }
     });
   };
